@@ -1,0 +1,9 @@
+{
+  "system_id": "apple-ane-kv-quantizer",
+  "shadow_mode": "ACTIVE",
+  "mastermind_synced": true,
+  "telemetry": {
+    "bandwidth_saved": 0.75,
+    "status": "ANE_OPTIMAL"
+  }
+}
