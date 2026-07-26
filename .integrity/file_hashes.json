@@ -1,0 +1,16 @@
+{
+  "repo": "apple-ane-kv-quantizer",
+  "algorithm": "sha256",
+  "file_count": 9,
+  "hashes": {
+    "README.md": "03844419d6a5b5b214ac200907af40a7438216e5e10303785e9b935f99d8dd8d",
+    "AKOS.md": "46cb9a4147f89d58b6aa756ed54a3bea6836da9ea8460e3620a36a2be0296a7e",
+    "AGENTS.md": "76216b3e1e9083f26027eb22bce8b7e2e8a7471712d86f4be75e1097c25820af",
+    "HELIX_STRAND.md": "573149e4b87836748793180a9abd613c99e891fafcce555e15d82070a416df84",
+    "mastermind_sidecar.py": "bf7281fe905d0e5ec1258817462929bb0345065b8fdd5b403cfd173d4d918a16",
+    "SECURITY_AND_FLEET_OPS.md": "26141c0f07d95847d679de423ddb7bdee6f3e319d204383c89a58d6d3bb610c7",
+    "HELIX.md": "118483f3fbe04191a91b13784a2eb0bc2581f174cfe835a38a56f83ae76b1255",
+    "tests/test_ane.py": "86bae57f22a70ce87ea9afae4f943f62238eaa4178532560be0b48336a88c576",
+    "src/apple_ane_kv_quantizer.py": "952075973a72ce2063e1c4bf819b12f29482a8f442edeaa2de6a05184ec585ad"
+  }
+}
