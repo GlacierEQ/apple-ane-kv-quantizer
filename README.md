@@ -1,51 +1,62 @@
-# Apple ANE KV Quantizer — Neural Engine FP16/INT8 Quantizer 🍏
+# Apple-Silicon KV Quantization Study
 
-> **Quantization and memory optimization engine for Apple Neural Engine (ANE) & Metal GPU inference.**
+Independent GlacierEQ portfolio work exploring deterministic KV-cache storage tradeoffs and local quantization examples for Apple-Silicon-oriented scenarios.
 
-[![Swift](https://img.shields.io/badge/Swift-5.9+-FA7343)]()
-[![Go](https://img.shields.io/badge/Go-1.21+-00ADD8)]()
-[![Python](https://img.shields.io/badge/Python-3.9+-blue)]()
-[![Domain](https://img.shields.io/badge/Domain-Edge%20AI-black)]()
+**Status:** local model + reference implementations.  
+**Evidence token:** `MODELED_SCENARIO_NOT_HARDWARE_MEASUREMENT`
 
----
+This repository is **not affiliated with, endorsed by, or operated by Apple**. It does not claim proprietary Apple access, production deployment, Neural Engine kernel execution, measured device performance, or preserved model accuracy.
 
-## 🎯 For Recruiters & Hiring Managers
+## What is verified here
 
-This repository implements an **Apple Neural Engine (ANE) KV-Cache Quantizer** — enabling large language models to run efficiently on Apple Silicon (M1/M2/M3/M4 & A-series chips). It demonstrates:
+The canonical runnable proof surface is `src/apple_ane_kv_quantizer.py` plus `tests/`.
 
-- **FP16 to INT8/INT4 dynamic quantization** tailored for ANE matrix multipliers
-- **Swift & Metal API integration** executing native GPU compute pipelines
-- **Go IPC dispatcher** for low-overhead multi-process tensor streaming
-- **Memory footprint reduction** by 4x with minimal accuracy loss
+It deterministically computes, from explicit inputs:
 
-**Why this matters**: On-device AI execution requires extreme memory efficiency. Quantizing KV caches specifically for Apple Silicon hardware enables private, offline LLM inference on consumer hardware.
+- FP16 KV-cache storage size;
+- modeled 4-bit or 8-bit storage size;
+- arithmetic storage reduction;
+- transfer-time estimate under an explicitly configured memory-bandwidth assumption.
 
----
+For example, converting the **storage representation** from 16 bits to 4 bits is arithmetically a 75% byte reduction. That is a modeled representation result, **not** a measured ANE bandwidth, latency, perplexity, or accuracy result.
 
-## 🔬 For Engineers & Technical Reviewers
+## Engineering anatomy
 
-### Core Components
+| Surface | Current evidence-bound role |
+|---|---|
+| `src/apple_ane_kv_quantizer.py` | Deterministic storage/transfer estimator; canonical tested capability |
+| `tests/test_ane.py` | Regression tests for 4-bit/8-bit estimates and fail-closed inputs |
+| `tests/test_quantizer.py` | Small independent quantization-scale example |
+| `src/quantizer.go` | Local INT8 quantization example; not a hardware benchmark |
+| `src/MetalComputeEngine.swift` | Metal API source example; not proof of ANE execution and not exercised by Linux CI |
+| `mastermind_sidecar.py` | Local status-report helper only; it does not establish mesh/runtime integration |
 
-| Component | Language | Purpose |
-|---|---|---|
-| `src/ane_quantizer.swift` | Swift | Native Metal & ANE tensor quantization routines |
-| `src/tensor_bridge.go` | Go | High-speed inter-process tensor ring buffer |
-| `src/quantizer_engine.py` | Python | Quantization scale factor computation and PyTorch export |
-| `tests/` | Python | Perplexity and loss evaluation test suite |
+Historical or architectural files remain available for provenance, but they do not raise the evidence level of the tested capability.
 
----
-
-## 🤖 ML/AI & Programmatic Mesh Integration
-
-- **MCP Tool**: `quantize_kv_cache()` — accessible tool for local model acceleration
-- **Mastermind Sidecar**: Integrates with APEX Highway mesh
-- **SHA-256 Integrity**: Tracked in `.integrity/file_hashes.json`
-
----
-
-## ⚡ Quick Start
+## Native proof
 
 ```bash
-python3 src/quantizer_engine.py
-python3 tests/test_quantizer.py
+PYTHONPATH=src python -m unittest discover -s tests -p 'test_*.py' -v
 ```
+
+The repository-owned Public Truth Gate runs the Python proof on supported CI versions and verifies that the public README retains the modeled-evidence and non-affiliation boundaries.
+
+## Explicit nonclaims
+
+Current repository evidence does **not** establish:
+
+- Apple Neural Engine kernel dispatch;
+- zero-copy unified-memory operation;
+- live Metal compute execution on Apple hardware;
+- 4× measured end-to-end memory improvement;
+- minimal or preserved model accuracy/perplexity;
+- production inference performance;
+- MCP tool registration;
+- APEX/AKOS/Mastermind live runtime connectivity;
+- Apple employment, affiliation, endorsement, or proprietary access.
+
+Those are higher evidence states and require their own hardware/runtime receipts before public promotion.
+
+## Why the capability matters
+
+The useful engineering mechanism here is the separation of **quantization arithmetic from hardware claims**. The local model makes representation assumptions explicit and reproducible, which provides a clean substrate for future hardware experiments without reporting those experiments as complete before they exist.
