@@ -1,0 +1,31 @@
+{
+  "schema": "glaciereq.proof-receipt.v1",
+  "repository": "GlacierEQ/apple-ane-kv-quantizer",
+  "source_sha": "a522fcca8c43d91801b093babcbf8f1cd7c44773ee3e471ad12e064ad802530c",
+  "proof_id": "elite-apple-ane-kv-quantizer-1786335149",
+  "environment": {
+    "python": "/Users/kcbflux/job-app/excellence/.venv-elite/bin/python",
+    "PYTHONPATH": "/Users/kcbflux/job-app/repos/apple-ane-kv-quantizer:/Users/kcbflux/job-app/repos/apple-ane-kv-quantizer/src",
+    "entry": "unittest"
+  },
+  "tests": [
+    "/Users/kcbflux/job-app/excellence/.venv-elite/bin/python -m unittest discover -s tests -v (x2)"
+  ],
+  "adversarial_tests": [
+    "tests/test_adversarial.py"
+  ],
+  "runtime": {
+    "operate": "scripts/operate.py (x2)",
+    "dual_run_ok": true,
+    "proof_dual_run_ok": true
+  },
+  "result": "PASS",
+  "limitations": [
+    "not production deployed",
+    "reference implementation only"
+  ],
+  "timestamp": "2026-08-10T04:12Z",
+  "artifact_hashes": {
+    "operability_receipt": "6dde97f7b551d0eb9d20ffb1733061c1d442d4f6eb7797eb69a6317f1fbaef76"
+  }
+}

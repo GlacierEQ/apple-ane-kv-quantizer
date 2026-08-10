@@ -1,0 +1,11 @@
+{
+  "schema": "glaciereq.promotion-authority-grant.v1",
+  "repository": "GlacierEQ/apple-ane-kv-quantizer",
+  "source_sha": "a522fcca8c43d91801b093babcbf8f1cd7c44773ee3e471ad12e064ad802530c",
+  "proof_receipt_digest": "fe2ffe807f9dac8cabe0a60a37513295b6dec2de722e7f0bedcc90216f835458",
+  "not_after": 1788927149.234226,
+  "mac": "4fe44e384b0ebdf812936dd78dd4a7e76be6e56be7b446a8713aef706c0ca7d9",
+  "issuer": "local_operator_promotion_authority",
+  "verified": true,
+  "secret_ref": "src/promotion_authority.py::LOCAL_OPERATOR_SECRET"
+}

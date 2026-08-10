@@ -1,0 +1,36 @@
+{
+  "schema": "glaciereq.operability-receipt.v1",
+  "repository": "GlacierEQ/apple-ane-kv-quantizer",
+  "at": "2026-08-10T04:12Z",
+  "source_sha": "a522fcca8c43d91801b093babcbf8f1cd7c44773ee3e471ad12e064ad802530c",
+  "entry": "scripts/operate.py",
+  "primary_output": {
+    "module": "apple_ane_kv_quantizer",
+    "ok": true,
+    "repository": "GlacierEQ/apple-ane-kv-quantizer",
+    "smoke": {
+      "args": [
+        "1"
+      ],
+      "content_checked": true,
+      "invoked": true,
+      "kind": "class",
+      "method": "quantize_kv_cache",
+      "module_local": true,
+      "name": "AppleANEKVQuantizer",
+      "result": [
+        {
+          "ane_transfer_latency_ms": 0.0,
+          "bandwidth_saved_percent": 75.0,
+          "quantized_size_mb": 0.0,
+          "raw_size_mb": 0.01,
+          "status": "ANE_OPTIMAL",
+          "tokens_count": 1
+        },
+        0.004227011231705546
+      ]
+    }
+  },
+  "dual_run_ok": true,
+  "result": "PASS"
+}
