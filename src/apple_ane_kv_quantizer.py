@@ -48,7 +48,6 @@ class AppleANEKVQuantizer:
 
         metrics = {
             "tokens_count": tokens_count,
-<<<<<<< HEAD
             "hidden_dim": hidden_dim,
             "target_bits": target_bits,
             "raw_size_mb": round(raw_bytes / (1024 * 1024), 4),
@@ -60,13 +59,4 @@ class AppleANEKVQuantizer:
             "evidence_state": "MODELED_SCENARIO_NOT_HARDWARE_MEASUREMENT",
         }
         elapsed_ms = (time.perf_counter() - started) * 1000.0
-=======
-            "raw_size_mb": round(raw_bytes / (1024 * 1024), 2),
-            "quantized_size_mb": round(quantized_bytes / (1024 * 1024), 2),
-            "bandwidth_saved_percent": round(bandwidth_saved_pct, 2),
-            "ane_transfer_latency_ms": round(transfer_time_ms, 4),
-            "status": "ANE_OPTIMAL"
-            }
-
->>>>>>> 6a4cf32 (chore: Hyper Excellence Activation & structural matrix alignment)
         return metrics, elapsed_ms
