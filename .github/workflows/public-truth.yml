@@ -5,31 +5,34 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
   verify:
+    name: verify (${{ matrix.python-version }})
     strategy:
+      fail-fast: false
       matrix:
-        python-version: ["3.11", "3.13"]
+        python-version: ["3.11", "3.12", "3.13"]
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
         with:
           persist-credentials: false
-      - uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
         with:
           python-version: ${{ matrix.python-version }}
       - name: Compile Python surfaces
-        run: python -m compileall -q src tests mastermind_sidecar.py
+        run: python -m compileall -q src tests scripts mastermind_sidecar.py
       - name: Run deterministic proof
         env:
           PYTHONPATH: src
         run: python -m unittest discover -s tests -p 'test_*.py' -v
-      - name: Verify public truth token
-        run: |
-          grep -q 'MODELED_SCENARIO_NOT_HARDWARE_MEASUREMENT' README.md
-          grep -q 'not affiliated with, endorsed by, or operated by Apple' README.md
+      - name: Verify public and machine truth boundary
+        run: python scripts/verify_public_truth.py
