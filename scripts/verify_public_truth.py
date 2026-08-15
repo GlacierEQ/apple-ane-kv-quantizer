@@ -15,6 +15,7 @@ def require(condition: bool, message: str) -> None:
 
 def main() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    normalized = readme.replace("**", "").replace("`", "")
     caps = json.loads((ROOT / "machine/capabilities.json").read_text(encoding="utf-8"))
     state = json.loads((ROOT / "machine/excellence-state.json").read_text(encoding="utf-8"))
 
@@ -23,11 +24,17 @@ def main() -> None:
         "modeled-evidence token missing",
     )
     require(
-        "not affiliated with, endorsed by, or operated by Apple" in readme,
+        "not affiliated with, endorsed by, or operated by Apple" in normalized,
         "Apple non-affiliation boundary missing",
     )
-    require("not a measured ANE bandwidth" in readme, "hardware-measurement boundary missing")
-    require("does not establish mesh/runtime integration" in readme, "mesh boundary missing")
+    require(
+        "not a measured ANE bandwidth" in normalized,
+        "hardware-measurement boundary missing",
+    )
+    require(
+        "does not establish mesh/runtime integration" in normalized,
+        "mesh boundary missing",
+    )
 
     allowed = {
         "deterministic-kv-storage-size-modeling",
