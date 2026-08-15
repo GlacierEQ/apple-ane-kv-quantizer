@@ -1,1 +1,15 @@
-{"capabilities": ["hyper-scaling"]}
+{
+  "schema": "glaciereq.bounded-capabilities.v1",
+  "capabilities": [
+    "deterministic-kv-storage-size-modeling",
+    "modeled-4bit-and-8bit-storage-reduction",
+    "explicit-bandwidth-transfer-time-estimation",
+    "validated-modeled-quantization-inputs"
+  ],
+  "operational_authority": false,
+  "apple_hardware_measurement": false,
+  "ane_kernel_execution": false,
+  "metal_runtime_execution_proven": false,
+  "model_accuracy_preservation_proven": false,
+  "live_mcp_apex_mastermind_integration": false
+}
