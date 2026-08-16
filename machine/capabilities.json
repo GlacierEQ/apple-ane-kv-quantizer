@@ -4,12 +4,30 @@
     "deterministic-kv-storage-size-modeling",
     "modeled-4bit-and-8bit-storage-reduction",
     "explicit-bandwidth-transfer-time-estimation",
-    "validated-modeled-quantization-inputs"
+    "validated-modeled-quantization-inputs",
+    "apex-mass-recovery-enrolled"
   ],
   "operational_authority": false,
   "apple_hardware_measurement": false,
   "ane_kernel_execution": false,
   "metal_runtime_execution_proven": false,
   "model_accuracy_preservation_proven": false,
-  "live_mcp_apex_mastermind_integration": false
+  "live_mcp_apex_mastermind_integration": false,
+  "recovery": {
+    "identity": "APEX_IS_THE_COUNTER_TO_CANONICAL_DESTRUCTION",
+    "law": "MAXIMUM_COHERENT_ADVANCE",
+    "program": "mass-job-repo-recovery",
+    "dual_plane": true
+  },
+  "planes": {
+    "verified": [
+      "deterministic-kv-storage-size-modeling",
+      "modeled-4bit-and-8bit-storage-reduction",
+      "explicit-bandwidth-transfer-time-estimation",
+      "validated-modeled-quantization-inputs"
+    ],
+    "implemented": [
+      "apex-mass-recovery-enrolled"
+    ]
+  }
 }
