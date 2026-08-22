@@ -40,13 +40,15 @@ class TestKVFrontierPlanner(unittest.TestCase):
         self.assertEqual(plan.evidence_state, EVIDENCE_STATE)
 
     def test_constraints_select_hybrid_recency_plan(self):
+        # 8-bit uniform needs 4 MiB, so the tighter budget forces the planner to
+        # preserve some hot FP16 context while compressing cold context to 4-bit.
         selected = self.planner.select(
-            KVConstraints(max_memory_mb=4.0, max_precision_pressure=0.60),
+            KVConstraints(max_memory_mb=3.75, max_precision_pressure=0.60),
             preference="quality",
         )
         self.assertGreater(selected.hot_tokens, 0)
         self.assertLess(selected.hot_tokens, self.workload.tokens)
-        self.assertLessEqual(selected.memory_mb, 4.0)
+        self.assertLessEqual(selected.memory_mb, 3.75)
         self.assertLessEqual(selected.precision_pressure, 0.60)
         self.assertEqual(selected.coordination_cost, 1)
 
