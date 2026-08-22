@@ -24,6 +24,10 @@ def main() -> None:
         "modeled-evidence token missing",
     )
     require(
+        "MODELED_KV_FRONTIER_NOT_HARDWARE_OR_QUALITY_MEASUREMENT" in readme,
+        "frontier-evidence token missing",
+    )
+    require(
         "not affiliated with, endorsed by, or operated by Apple" in normalized,
         "Apple non-affiliation boundary missing",
     )
@@ -41,6 +45,11 @@ def main() -> None:
         "modeled-4bit-and-8bit-storage-reduction",
         "explicit-bandwidth-transfer-time-estimation",
         "validated-modeled-quantization-inputs",
+        "full-kv-topology-footprint-modeling",
+        "adaptive-recency-tiered-kv-planning",
+        "constraint-based-kv-plan-selection",
+        "pareto-kv-plan-frontier",
+        "receipt-hashed-kv-plan-artifacts",
     }
     require(set(caps.get("capabilities", [])) == allowed, "capability allowlist drift")
     require(caps.get("operational_authority") is False, "operational authority must be false")
