@@ -4,7 +4,12 @@
     "deterministic-kv-storage-size-modeling",
     "modeled-4bit-and-8bit-storage-reduction",
     "explicit-bandwidth-transfer-time-estimation",
-    "validated-modeled-quantization-inputs"
+    "validated-modeled-quantization-inputs",
+    "full-kv-topology-footprint-modeling",
+    "adaptive-recency-tiered-kv-planning",
+    "constraint-based-kv-plan-selection",
+    "pareto-kv-plan-frontier",
+    "receipt-hashed-kv-plan-artifacts"
   ],
   "operational_authority": false,
   "apple_hardware_measurement": false,
