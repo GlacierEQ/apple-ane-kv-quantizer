@@ -85,11 +85,15 @@ def main() -> int:
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_bytes(encoded)
 
-    receipt_path = args.receipt or args.output.with_suffix(args.output.suffix + ".receipt.json")
+    receipt_path = args.receipt or args.output.with_suffix(
+        args.output.suffix + ".receipt.json"
+    )
     receipt = {
         "schema": "glaciereq.apple-kv-frontier-receipt.v1",
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "repository": os.environ.get("GITHUB_REPOSITORY", "GlacierEQ/apple-ane-kv-quantizer"),
+        "repository": os.environ.get(
+            "GITHUB_REPOSITORY", "GlacierEQ/apple-ane-kv-quantizer"
+        ),
         "commit": os.environ.get("GITHUB_SHA", "local"),
         "artifact": str(args.output),
         "artifact_bytes": len(encoded),
@@ -98,7 +102,9 @@ def main() -> int:
         "verified_state": "DETERMINISTIC_MODEL_EXECUTED",
     }
     receipt_path.parent.mkdir(parents=True, exist_ok=True)
-    receipt_path.write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    receipt_path.write_text(
+        json.dumps(receipt, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
 
     print(json.dumps(receipt, indent=2, sort_keys=True))
     return 0

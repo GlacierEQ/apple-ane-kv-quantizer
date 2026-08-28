@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Fail-closed truth checks for the Apple-Silicon quantization study."""
+
 from __future__ import annotations
 
 import json
@@ -17,7 +18,9 @@ def main() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     normalized = readme.replace("**", "").replace("`", "")
     caps = json.loads((ROOT / "machine/capabilities.json").read_text(encoding="utf-8"))
-    state = json.loads((ROOT / "machine/excellence-state.json").read_text(encoding="utf-8"))
+    state = json.loads(
+        (ROOT / "machine/excellence-state.json").read_text(encoding="utf-8")
+    )
 
     require(
         "MODELED_SCENARIO_NOT_HARDWARE_MEASUREMENT" in readme,
@@ -52,20 +55,43 @@ def main() -> None:
         "receipt-hashed-kv-plan-artifacts",
     }
     require(set(caps.get("capabilities", [])) == allowed, "capability allowlist drift")
-    require(caps.get("operational_authority") is False, "operational authority must be false")
-    require(caps.get("apple_hardware_measurement") is False, "hardware measurement claim must be false")
-    require(caps.get("ane_kernel_execution") is False, "ANE execution claim must be false")
-    require(caps.get("metal_runtime_execution_proven") is False, "Metal runtime claim must be false")
-    require(caps.get("model_accuracy_preservation_proven") is False, "accuracy claim must be false")
+    require(
+        caps.get("operational_authority") is False,
+        "operational authority must be false",
+    )
+    require(
+        caps.get("apple_hardware_measurement") is False,
+        "hardware measurement claim must be false",
+    )
+    require(
+        caps.get("ane_kernel_execution") is False, "ANE execution claim must be false"
+    )
+    require(
+        caps.get("metal_runtime_execution_proven") is False,
+        "Metal runtime claim must be false",
+    )
+    require(
+        caps.get("model_accuracy_preservation_proven") is False,
+        "accuracy claim must be false",
+    )
     require(
         caps.get("live_mcp_apex_mastermind_integration") is False,
         "live mesh claim must be false",
     )
 
-    require(state.get("principal_state") == "FUNCTIONAL_CANDIDATE", "stale promotion restored")
-    require(state.get("operational_authority") is False, "state grants operational authority")
+    require(
+        state.get("principal_state") == "FUNCTIONAL_CANDIDATE",
+        "stale promotion restored",
+    )
+    require(
+        state.get("operational_authority") is False,
+        "state grants operational authority",
+    )
     proof = state.get("gates", {}).get("DETERMINISTIC_PROOF_GREEN", {})
-    require(proof.get("status") == "PENDING_CANONICAL_CI", "fresh exact-head proof gate missing")
+    require(
+        proof.get("status") == "PENDING_CANONICAL_CI",
+        "fresh exact-head proof gate missing",
+    )
 
     print("PUBLIC_TRUTH_PASS")
 

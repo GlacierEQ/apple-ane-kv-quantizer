@@ -45,7 +45,9 @@ class KVWorkload:
     def kv_values_per_token(self) -> int:
         # K and V each own a cache tensor. GQA/MQA can reduce the KV width relative
         # to the model hidden width, so the ratio is explicit rather than assumed.
-        return ceil(2 * self.layers * self.hidden_dim * self.batch_size * self.kv_width_ratio)
+        return ceil(
+            2 * self.layers * self.hidden_dim * self.batch_size * self.kv_width_ratio
+        )
 
     @property
     def fp16_bytes(self) -> int:
@@ -144,15 +146,21 @@ class KVFrontierPlanner:
     ) -> None:
         self.workload = workload
         self.cold_bits = tuple(dict.fromkeys(int(bits) for bits in cold_bits))
-        if not self.cold_bits or any(bits not in _ALLOWED_BITS for bits in self.cold_bits):
+        if not self.cold_bits or any(
+            bits not in _ALLOWED_BITS for bits in self.cold_bits
+        ):
             raise ValueError("cold_bits must contain only 4, 8, or 16")
         fractions = tuple(dict.fromkeys(float(value) for value in hot_fractions))
-        if not fractions or any(not isfinite(value) or not 0 <= value <= 1 for value in fractions):
+        if not fractions or any(
+            not isfinite(value) or not 0 <= value <= 1 for value in fractions
+        ):
             raise ValueError("hot_fractions must be finite values in [0, 1]")
         self.hot_fractions = fractions
 
     def _candidate(self, cold_bits: int, hot_fraction: float) -> KVPlan:
-        hot_tokens = min(self.workload.tokens, round(self.workload.tokens * hot_fraction))
+        hot_tokens = min(
+            self.workload.tokens, round(self.workload.tokens * hot_fraction)
+        )
         cold_tokens = self.workload.tokens - hot_tokens
         values = self.workload.kv_values_per_token
         total_bits = values * (hot_tokens * 16 + cold_tokens * cold_bits)
@@ -168,7 +176,9 @@ class KVFrontierPlanner:
 
         # Hybrid hot/cold precision needs one extra coordination boundary. Uniform
         # plans do not. The cost is ordinal and used only as a Pareto dimension.
-        coordination_cost = int(hot_tokens not in {0, self.workload.tokens} and cold_bits != 16)
+        coordination_cost = int(
+            hot_tokens not in {0, self.workload.tokens} and cold_bits != 16
+        )
         return KVPlan(
             hot_tokens=hot_tokens,
             hot_bits=16,
@@ -202,7 +212,9 @@ class KVFrontierPlanner:
         frontier = [
             candidate
             for candidate in items
-            if not any(other.dominates(candidate) for other in items if other is not candidate)
+            if not any(
+                other.dominates(candidate) for other in items if other is not candidate
+            )
         ]
         return sorted(
             frontier,
@@ -213,7 +225,9 @@ class KVFrontierPlanner:
             ),
         )
 
-    def feasible_frontier(self, constraints: KVConstraints | None = None) -> list[KVPlan]:
+    def feasible_frontier(
+        self, constraints: KVConstraints | None = None
+    ) -> list[KVPlan]:
         active = constraints or KVConstraints()
         feasible = [plan for plan in self.candidates() if active.accepts(plan)]
         if not feasible:
@@ -232,11 +246,18 @@ class KVFrontierPlanner:
         if preference not in {"balanced", "memory", "latency", "quality"}:
             raise ValueError("preference must be balanced, memory, latency, or quality")
         if preference == "memory":
-            return min(frontier, key=lambda plan: (plan.memory_bytes, plan.precision_pressure))
+            return min(
+                frontier, key=lambda plan: (plan.memory_bytes, plan.precision_pressure)
+            )
         if preference == "latency":
-            return min(frontier, key=lambda plan: (plan.modeled_transfer_ms, plan.precision_pressure))
+            return min(
+                frontier,
+                key=lambda plan: (plan.modeled_transfer_ms, plan.precision_pressure),
+            )
         if preference == "quality":
-            return min(frontier, key=lambda plan: (plan.precision_pressure, plan.memory_bytes))
+            return min(
+                frontier, key=lambda plan: (plan.precision_pressure, plan.memory_bytes)
+            )
 
         # Balanced ordering only orders the already non-dominated frontier. Each
         # dimension is normalized to its frontier range, preserving Pareto primacy.

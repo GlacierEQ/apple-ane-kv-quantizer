@@ -12,8 +12,7 @@ class PromotionLockoutRemovalTests(unittest.TestCase):
         self.assertFalse((ROOT / "src" / "promotion_authority.py").exists())
         self.assertFalse((ROOT / "machine" / "promotion_authority.json").exists())
         source_text = "\n".join(
-            path.read_text(encoding="utf-8")
-            for path in (ROOT / "src").rglob("*.py")
+            path.read_text(encoding="utf-8") for path in (ROOT / "src").rglob("*.py")
         )
         self.assertNotIn("GLACIEREQ_PROMOTION_SECRET", source_text)
         self.assertNotIn("LOCAL_OPERATOR_SECRET", source_text)

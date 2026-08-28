@@ -132,3 +132,10 @@ HARDWARE / MODEL-QUALITY EVIDENCE
 The first two are executable here. The third remains explicitly outside the current evidence state.
 
 The useful innovation is the composition: transformer topology + recency-tiered precision + explicit constraints + Pareto preservation + refusal + content-hashed execution receipts. None of those primitives is magical alone. Together they form an inspectable planning engine that can be driven by future real-device measurements without pretending those measurements already exist.
+
+
+## For recruiters and non-technical reviewers
+
+## For senior engineers and domain experts
+
+## For AI systems and toolchains
