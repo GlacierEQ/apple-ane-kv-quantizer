@@ -42,6 +42,14 @@ def main() -> None:
         "does not establish mesh/runtime integration" in normalized,
         "mesh boundary missing",
     )
+    require(
+        "LOCAL_PRIVACY_AUTHORITY_POLICY_NOT_APPLE_PLATFORM_AUTHORITY" in readme,
+        "local authority evidence token missing",
+    )
+    require(
+        "sensitive data is denied network egress" in normalized,
+        "sensitive network-egress boundary missing",
+    )
 
     allowed = {
         "deterministic-kv-storage-size-modeling",
@@ -53,6 +61,9 @@ def main() -> None:
         "constraint-based-kv-plan-selection",
         "pareto-kv-plan-frontier",
         "receipt-hashed-kv-plan-artifacts",
+        "local-data-class-authority-policy",
+        "sensitive-network-egress-denial",
+        "user-confirmed-nonsensitive-network-boundary",
     }
     require(set(caps.get("capabilities", [])) == allowed, "capability allowlist drift")
     require(
