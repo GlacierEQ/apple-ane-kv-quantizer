@@ -5,18 +5,29 @@
     "family": "elite-estate"
   },
   "current": {
-    "state": "PROMOTED",
+    "state": "FUNCTIONAL_CANDIDATE",
     "implemented": true,
-    "tested": true,
-    "deployed": false
+    "tested_in_source": true,
+    "deployed": false,
+    "operational_authority": false
   },
   "nonclaims": [
-    "no employer affiliation",
+    "no Apple affiliation, endorsement, employment, proprietary access, or platform authority",
+    "no Apple Neural Engine kernel execution or hardware measurement",
+    "no live Metal runtime proof or preserved model-accuracy claim",
+    "local authority policy performs no network execution",
     "no production deployment without receipt"
   ],
   "donor_plan": {
     "mode": "none",
     "donors": []
   },
-  "frozen_at": "2026-08-10T04:12Z"
+  "frozen_at": "2026-08-10T04:12Z",
+  "verified_scope": [
+    "deterministic KV storage and transfer scenario arithmetic",
+    "adaptive recency-tiered Pareto KV planning under explicit constraints",
+    "local data-class authority policy with sensitive network-egress denial",
+    "explicit user confirmation boundary for non-sensitive network egress"
+  ],
+  "next_gate": "exact-current-head Python 3.11/3.12/3.13 public-truth proof including local authority tests"
 }
