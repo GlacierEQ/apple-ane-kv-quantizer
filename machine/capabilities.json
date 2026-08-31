@@ -9,12 +9,16 @@
     "adaptive-recency-tiered-kv-planning",
     "constraint-based-kv-plan-selection",
     "pareto-kv-plan-frontier",
-    "receipt-hashed-kv-plan-artifacts"
+    "receipt-hashed-kv-plan-artifacts",
+    "local-data-class-authority-policy",
+    "sensitive-network-egress-denial",
+    "user-confirmed-nonsensitive-network-boundary"
   ],
   "operational_authority": false,
   "apple_hardware_measurement": false,
   "ane_kernel_execution": false,
   "metal_runtime_execution_proven": false,
   "model_accuracy_preservation_proven": false,
-  "live_mcp_apex_mastermind_integration": false
+  "live_mcp_apex_mastermind_integration": false,
+  "local_authority_policy": "LOCAL_PRIVACY_AUTHORITY_POLICY_NOT_APPLE_PLATFORM_AUTHORITY"
 }
