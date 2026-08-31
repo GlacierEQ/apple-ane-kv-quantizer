@@ -8,7 +8,10 @@
     "deterministic-kv-storage-size-modeling",
     "modeled-4bit-and-8bit-storage-reduction",
     "explicit-bandwidth-transfer-time-estimation",
-    "validated-modeled-quantization-inputs"
+    "validated-modeled-quantization-inputs",
+    "local-data-class-authority-policy",
+    "sensitive-network-egress-denial",
+    "user-confirmed-nonsensitive-network-boundary"
   ],
   "gates": {
     "IDENTITY_RESOLVED": {
@@ -17,7 +20,7 @@
     },
     "CENTRAL_MECHANISM_PRESENT": {
       "status": "PASS",
-      "evidence": "src/apple_ane_kv_quantizer.py"
+      "evidence": "src/apple_ane_kv_quantizer.py + src/kv_frontier.py + src/on_device_authority.py"
     },
     "PRIOR_EXACT_HEAD_PROOF": {
       "status": "PASS",
@@ -34,7 +37,7 @@
     },
     "DETERMINISTIC_PROOF_GREEN": {
       "status": "PENDING_CANONICAL_CI",
-      "evidence": "machine-state and proof-matrix changes require fresh exact-current-head canonical proof"
+      "evidence": "current KV planner and local authority extension require fresh exact-current-head canonical proof"
     },
     "CANONICAL_POSITION_RESOLVED": {
       "status": "PENDING"
@@ -53,5 +56,10 @@
     "promotion_receipts_are_non_authoritative_for_current_head": true,
     "placeholder_hyper_validated_identity_is_not_current_proof": true
   },
-  "evolution_cursor": "fresh_exact_head_ci_then_surface_reconciliation"
+  "evolution_cursor": "fresh_exact_head_ci_then_surface_reconciliation",
+  "current_head_extension": {
+    "mechanism": "src/on_device_authority.py",
+    "tests": "tests/test_on_device_authority.py",
+    "state": "IMPLEMENTED_CURRENT_HEAD_NATIVE_PROOF_REQUIRED"
+  }
 }
