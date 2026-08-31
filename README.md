@@ -53,6 +53,16 @@ This repository explicitly applies mechanisms from several stronger GlacierEQ sy
 
 This is an exercised code/CI integration for the mechanisms named above. It does **not** establish live APEX, MCP, Mastermind, or cross-repository runtime connectivity.
 
+## Local privacy and authority capsule
+
+The repository now includes `src/on_device_authority.py`, a deterministic policy boundary for deciding whether a modeled operation remains local, requires explicit network confirmation, or is denied.
+
+`LOCAL_PRIVACY_AUTHORITY_POLICY_NOT_APPLE_PLATFORM_AUTHORITY`
+
+The policy distinguishes public, personal, and sensitive data. Local work can remain local; non-sensitive network egress requires explicit user confirmation; **sensitive data is denied network egress** by this policy even when a caller marks network use as confirmed. Every decision emits a SHA-256 receipt and explicitly records that no network or ANE execution occurred.
+
+This adds the missing on-device trust layer around the KV planner without pretending the repository controls Apple hardware or operating-system privacy APIs.
+
 ## What is verified here
 
 The runnable proof surfaces are:
@@ -62,6 +72,8 @@ The runnable proof surfaces are:
 - `tests/test_ane.py` for the original model;
 - `tests/test_kv_frontier.py` for full-footprint arithmetic, hybrid plans, frontier non-domination, and adversarial failure inputs;
 - `scripts/kv_plan.py` for executable JSON plans and receipt hashes;
+- `src/on_device_authority.py` for local/data-class/network authority decisions;
+- `tests/test_on_device_authority.py` for local allow, confirmation, sensitive-egress denial, and malformed-request refusal;
 - `scripts/verify_public_truth.py` for public-claim boundaries;
 - `scripts/ci/verify_elite_core.sh` for the repository-owned integrated proof path.
 
