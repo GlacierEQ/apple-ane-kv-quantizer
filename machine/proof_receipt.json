@@ -4,12 +4,12 @@
   "source_sha": "a522fcca8c43d91801b093babcbf8f1cd7c44773ee3e471ad12e064ad802530c",
   "proof_id": "elite-apple-ane-kv-quantizer-1786335149",
   "environment": {
-    "python": "/Users/kcbflux/job-app/excellence/.venv-elite/bin/python",
-    "PYTHONPATH": "/Users/kcbflux/job-app/repos/apple-ane-kv-quantizer:/Users/kcbflux/job-app/repos/apple-ane-kv-quantizer/src",
+    "python": "${HOME}/job-app/excellence/.venv-elite/bin/python",
+    "PYTHONPATH": "${HOME}/job-app/repos/apple-ane-kv-quantizer:${HOME}/job-app/repos/apple-ane-kv-quantizer/src",
     "entry": "unittest"
   },
   "tests": [
-    "/Users/kcbflux/job-app/excellence/.venv-elite/bin/python -m unittest discover -s tests -v (x2)"
+    "${HOME}/job-app/excellence/.venv-elite/bin/python -m unittest discover -s tests -v (x2)"
   ],
   "adversarial_tests": [
     "tests/test_adversarial.py"
